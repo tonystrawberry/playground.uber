@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet } from 'react-native'
 import { Provider } from 'react-redux'
 import HomeScreen from './screens/HomeScreen'
 import MapScreen from "./screens/MapScreen"
@@ -12,10 +12,15 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
-          <Stack.Screen name="MapScreen" component={MapScreen} options={{ headerShown: false }} />
-        </Stack.Navigator>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={{ flex: 1 }}
+        >
+          <Stack.Navigator>
+            <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="MapScreen" component={MapScreen} options={{ headerShown: false }} />
+          </Stack.Navigator>
+        </KeyboardAvoidingView>
       </NavigationContainer>
     </Provider>
   )
